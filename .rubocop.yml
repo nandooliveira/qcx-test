@@ -1,0 +1,54 @@
+require: rubocop-performance
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - docs/**/*
+    - vendor/**/*
+    - !ruby/regexp /old_and_unused\.rb$/
+  TargetRubyVersion: 2.5
+
+Layout/LineLength:
+  Severity: fatal
+  Description: 'Limit lines to 120 characters.'
+  Max: 120
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+    Enabled: false
+
+Naming/PredicateName:
+  NamePrefix:
+    - is_
+
+Style/StringLiterals:
+  Severity: fatal
+  Enabled: true
+
+Layout/IndentationWidth:
+  Enabled: true
+
+Layout/FirstHashElementIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Style/CollectionMethods:
+  Severity: fatal
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'find'
+    find_all: 'select'
