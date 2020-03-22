@@ -44,6 +44,7 @@ module Api
         Rack::Response.new([response_data.to_json], status, 'Content-type' => 'application/json')
       end
 
+      mount ::Api::V1::Issues
       mount ::Api::V1::Status
       mount ::Api::V1::Webhooks
     end

@@ -8,33 +8,29 @@ module Requests
   end
 
   module Helpers
-    def post_action(path:, token: nil, params: {}, header_params: {})
-      post path, params: params.to_json, headers: build_headers(token).merge(header_params)
+    def post_action(path:, params: {}, header_params: {})
+      post path, params: params.to_json, headers: build_headers(header_params)
     end
 
-    def put_action(path:, token: nil, params: {})
-      put path, params: params, headers: build_headers(token)
+    def put_action(path:, params: {}, header_params: {})
+      put path, params: params, headers: build_headers(header_params)
     end
 
-    def get_action(path:, token: nil, params: {})
-      get path, params: params, headers: build_headers(token)
+    def get_action(path:, params: {}, header_params: {})
+      get path, params: params, headers: build_headers(header_params)
     end
 
-    def delete_action(path:, token: nil, params: {})
-      delete path, params: params, headers: build_headers(token)
+    def delete_action(path:, params: {}, header_params: {})
+      delete path, params: params, headers: build_headers(header_params)
     end
 
     private
 
-    def build_headers(token)
-      header_params = {
+    def build_headers(header_params)
+      {
         'Accept'       => 'application/json',
         'Content-Type' => 'application/json',
-      }
-
-      header_params['Authorization'] = "Bearer #{token}" if token
-
-      header_params
+      }.merge(header_params)
     end
   end
 end
