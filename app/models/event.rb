@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   EVENT_TYPES = %w[
+    ping
     check_run
     check_suite
     commit_comment
