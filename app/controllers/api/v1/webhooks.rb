@@ -4,11 +4,11 @@ module Api
       resource :webhooks do
         desc 'Return Status'
         post :handle do
-          event_type = headers['Secret-Password']
+          verify_signature(request.body.read)
 
           ::Core::Webhooks::UseCases::Handle.new(
-            event_type: event_type,
-            params:     {}
+            headers: headers,
+            params:  params
           ).call
 
           present({ message: 'Event Received' })

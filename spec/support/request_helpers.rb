@@ -8,8 +8,8 @@ module Requests
   end
 
   module Helpers
-    def post_action(path:, token: nil, params: {})
-      post path, params: params, headers: build_headers(token)
+    def post_action(path:, token: nil, params: {}, header_params: {})
+      post path, params: params.to_json, headers: build_headers(token).merge(header_params)
     end
 
     def put_action(path:, token: nil, params: {})
