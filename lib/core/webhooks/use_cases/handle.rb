@@ -9,6 +9,8 @@ module Core
           handle_webhook
         end
 
+        private
+
         def handle_webhook
           service_class = "::Core::Webhooks::Services::Handle#{event_type.camelize}WebhookEvent".constantize
           service_class.new(service_params).call
