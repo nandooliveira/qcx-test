@@ -34,6 +34,7 @@ gem 'grape-entity'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'fabrication'
 end
 
@@ -48,6 +49,6 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'shoulda-matchers'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end

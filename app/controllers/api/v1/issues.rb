@@ -3,7 +3,7 @@ module Api
     class Issues < ::Grape::API
       resource :issues do
         http_basic do |email, password|
-          email == 'test@gmail.com' && password == '123456'
+          email == ENV['EMAIL'] && password == ENV['PASSWORD']
         end
 
         route_param :number do
