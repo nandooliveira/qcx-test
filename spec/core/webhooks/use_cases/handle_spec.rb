@@ -28,23 +28,23 @@ describe ::Core::Webhooks::UseCases::Handle do
       described_class.new(headers: headers, params: params).call
     end
 
-    let(:delivery)   { '89ec1780-6bc2-11ea-8f7a-bd2696ebe5aa' }
+    let(:delivery)   { SecureRandom.uuid }
     let(:event_type) { 'ping' }
-    let(:signature)  { 'sha1=12518a93a2cdb9f54ed8bd8af5eac45b24871f49' }
+    let(:signature)  { SecureRandom.hex(32) }
     let(:headers) do
       {
-        'X-GitHub-Delivery' => delivery,
-        'X-GitHub-Event'    => event_type,
+        'X-Github-Delivery' => delivery,
+        'X-Github-Event'    => event_type,
         'X-Hub-Signature'   => signature,
       }
     end
-    let(:params) { {} }
+    let(:params) { { test: 'test' } }
 
     context 'unknown event' do
       let(:event_type) { 'unknown_event' }
 
-      it 'create using the generic service' do
-        expect { handle_event }.to change(::Event, :count).by(1)
+      it 'do not save event if it is not a valid event' do
+        expect { handle_event }.not_to change(::Event, :count)
       end
 
       it 'create with correct data' do
