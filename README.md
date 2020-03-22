@@ -45,25 +45,71 @@ Example result:
 ]
 ```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
 
-* System dependencies
+ruby 2.6.3p62 (2019-04-16 revision 67580)
 
-* Configuration
+* How to run this project locally
 
-* Database creation
+1. Clone this repository:
 
-* Database initialization
+```sh
+git clone git@github.com:nandooliveira/qcx-test.git
+```
+
+2. Go inside the directory:
+
+```sh
+cd qcx-test
+```
+
+3. Install all required gems:
+
+```sh
+bundle install
+```
+
+4. Create database and tables:
+
+```sh
+rails db:create
+rails db:migrate
+```
+
+5. Configure Environment Variables. To do that in development and test environment, just copy the `.env-sample` file renaming it to `.env` and edit the file with your configuration:
+
+```sh
+cp .env-sample .env
+```
+
+Example of a valid `.env` file:
+
+```sh
+EMAIL=test@gmail.com
+PASSWORD=123456
+SECRET_TOKEN=d42fb616d55a3f066f066b9cf8aae59bc2479115c6e52a4ac70e30f49882b973
+```
+
+**Obs1.:** This `SECRET_TOKEN` is going to be used to protect your webhook endpoint, if you do not add this token when configuring the webhook on your repository the request are going to return `Unhautorized`.
+**Obs2.:** To generate a good `SECRET_TOKEN` you can use ruby to generate a 32 bit hex key:
+
+```sh
+" Enter in rails console
+rails c
+
+" In rails console generate a new key
+2.6.3 :001 > p SecureRandom.hex(32)
+"440080ec279c90c85b6be9cca342142396323ff6b2ac356962bdd42ff4ab12e1"
+```
+
+6. Last step, just run the server:
+
+```sh
+rails s
+```
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+bundle exec rspec spec
+```
