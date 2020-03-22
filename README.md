@@ -4,7 +4,7 @@
 
 > POST /api/v1/webhooks/handle
 
-It can receive any data. Payload is going to be saved on database, and some github header is going to be used to get other data, like event type and signature.
+This endpoint can receive any data. Payload is going to be saved on database, and some github header is going to be used to get other data, like event type and signature.
 
 ## Endpoints:
 
